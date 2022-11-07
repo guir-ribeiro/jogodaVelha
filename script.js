@@ -3,9 +3,10 @@ let vez = 0;
 let players = [];
 const symbol = ["x", "o"]
 let game = ["","","","","","","","",""]
-let winGame = false;
+var winGame = false;
 let gameOver = false;
 let winner = "";
+let divwinGame = document.querySelector("#winGame");
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -34,23 +35,32 @@ function CreateDivBox(event){
     boxElement.appendChild(text)
     box.appendChild(boxElement)
     game[id] = symbol[vez];
+    console.log(game);
 
-    if(game[0] == game[1] && game[1] == game[2] && game[2] == symbol[vez]){
+    if(game[0] == game[1] && game[1] == game[2] && game[2] == symbol[vez] && game[0] !== "" ){
       winGame = true;
-    } else if(game[3] == game[4] && game[4] == game[5] && game[5] == symbol[vez]){
+      console.log("if1")
+    } else if(game[3] == game[4] && game[4] == game[5] && game[5] == symbol[vez] && game[3] !== ""){
       winGame = true;
-    } else if(game[6] == game[7] && game[7] == game[8] && game[8] == symbol[vez]){
+      console.log("if2")
+    } else if(game[6] == game[7] && game[7] == game[8] && game[8] == symbol[vez] && game[6] !== ""){
       winGame = true;
-    } else if(game[0] == game[3] && game[3] == game[6] && game[6] == symbol[vez]){
+      console.log("if3")
+    } else if(game[0] == game[3] && game[3] == game[6] && game[6] == symbol[vez] && game[0] !== ""){
       winGame = true;
-    } else if(game[1] == game[4] && game[4] == game[7] && game[7] == symbol[vez]){
+      console.log("if4")
+    } else if(game[1] == game[4] && game[4] == game[7] && game[7] == symbol[vez] && game[1] !== ""){
       winGame = true;
-    } else if(game[2] == game[5] && game[5] == game[8] && game[8] == symbol[vez]){
+      console.log("if5")
+    } else if(game[2] == game[5] && game[5] == game[8] && game[8] == symbol[vez] && game[2] !== ""){
       winGame = true;
-    } else if(game[0] == game[4] && game[4] == game[8] && game[8] == symbol[vez]){
+      console.log("if6")
+    } else if(game[0] == game[4] && game[4] == game[8] && game[8] == symbol[vez] && game[0] !== ""){
       winGame = true;
-    } else if(game[2] == game[4] && game[4] == game[6] && game[6] == symbol[vez]){
+      console.log("if7")
+    } else if(game[2] == game[4] && game[4] == game[6] && game[6] == symbol[vez] && game[2] !== ""){
       winGame = true;
+      console.log("if8")
     }else{
        vez == 0? vez++ : vez--; 
     }
@@ -66,8 +76,7 @@ function CreateDivBox(event){
     erro.style.display = ("flex");
 
   } else if(winGame == true){
-    let winGame = document.querySelector("#winGame");
-    winGame.style.display = ("flex");
+    divwinGame.style.display = ("flex");
     let winGameP = document.querySelector("#winGameP");
     winGameP.innerHTML = `<p> O ganhador foi:${winner} <\p>`
 
@@ -84,19 +93,23 @@ function addPlayers(player1,player2){
 function restart(){
   let start = document.querySelector('#start');
   let gameOver = document.querySelector('#gameOver')
-  let winGame = document.querySelector("#winGame");
+  let classX = document.querySelectorAll(".x");
+  let classO = document.querySelectorAll(".o");
   start.style.display = ("flex");
   gameOver.style.display = ("none");
-  winGame.style.display = ("none");
+  divwinGame.style.display = ("none");
   vez = 0;
-  game = ["","","","","","","","",""]
+  game =["","","","","","","","",""];
   winGame = false;
   gameOver = false;
   winner = "";
 
-  boxes.forEach((box) => {
-    box.forEach((div) => { 
-      div.parentNode.removeChild(div);
-    })
+  
+  classX.forEach(div => { 
+    div.parentNode.removeChild(div);
   })
+  classO.forEach(div => { 
+    div.parentNode.removeChild(div);
+  })
+
 }
