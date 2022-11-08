@@ -103,6 +103,7 @@ function restart(){
   game =["","","","","","","","",""];
   winGame = false;
   gameOver = false;
+  players = [];
   winner = "";
 
   
