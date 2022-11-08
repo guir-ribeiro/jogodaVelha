@@ -66,23 +66,24 @@ function CreateDivBox(event){
     }
 
     if(players[0] == "" || players[1] == ""){
-      vez == 0? winner = "Jogador1" : winner = "Jogador1" ;
+      vez == 0? winner = "Jogador1" : winner = "Jogador2" ;
     } else{
       vez == 0? winner = players[0] : winner = players[1]
     }
 
-  }else if(winGame !== false && gameOver !== false ){
-    let erro = document.querySelector('#erro');
-    erro.style.display = ("flex");
+    if(winGame == true){
+      divwinGame.style.display = ("flex");
+      let winGameP = document.querySelector("#winGameP");
+      winGameP.innerHTML = `<p> O ganhador foi:${winner} <\p>`
+    
+    } else if(gameOver == true){
+      let gameOver = document.querySelector('#gameOver')
+      gameOver.style.display = ("flex");
 
-  } else if(winGame == true){
-    divwinGame.style.display = ("flex");
-    let winGameP = document.querySelector("#winGameP");
-    winGameP.innerHTML = `<p> O ganhador foi:${winner} <\p>`
-
-  } else{
-    let gameOver = document.querySelector('#gameOver')
-    gameOver.style.display = ("flex");
+    } else if(winGame == true && gameOver == true ){
+        let erro = document.querySelector('#erro');
+        erro.style.display = ("flex");
+    }
   }
 }
 
