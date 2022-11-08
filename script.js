@@ -76,7 +76,7 @@ function CreateDivBox(event){
       let winGameP = document.querySelector("#winGameP");
       winGameP.innerHTML = `<p> O ganhador foi:${winner} <\p>`
     
-    } else if(gameOver == true){
+    } else if(game.indexOf("") == -1){
       let gameOver = document.querySelector('#gameOver')
       gameOver.style.display = ("flex");
 
