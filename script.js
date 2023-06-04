@@ -2,7 +2,7 @@ let boxes = document.querySelectorAll(".box");
 let vez = 0;
 let players = [];
 const symbol = ["x", "o"]
-let game = ["","","","","","","","",""]
+let game = ['', '', '', '', '', '', '', '', '']
 var winGame = false;
 let gameOver = false;
 let winner = "";
@@ -29,38 +29,83 @@ function CreateDivBox(event){
   let box = event.target;
   let id = box.id;
   if(winGame == false && gameOver == false){
+
+    if(game[id] !== ''){
+      alert('Posição já ocupada meu caro')
+      return
+    }
+
     let boxElement = document.createElement("div");
     boxElement.classList.add(symbol[vez])
     let text = document.createTextNode(symbol[vez]);
     boxElement.appendChild(text)
     box.appendChild(boxElement)
     game[id] = symbol[vez];
-    console.log(game);
 
-    if(game[0] == game[1] && game[1] == game[2] && game[2] == symbol[vez] && game[0] !== "" ){
+    if(game[0] == game[1] 
+      && game[1] == game[2] 
+      && game[2] == symbol[vez] 
+      && game[0] !== "" ){
+
       winGame = true;
       console.log("if1")
-    } else if(game[3] == game[4] && game[4] == game[5] && game[5] == symbol[vez] && game[3] !== ""){
+
+    } else if(game[3] == game[4] 
+      && game[4] == game[5] 
+      && game[5] == symbol[vez] 
+      && game[3] !== ""){
+
       winGame = true;
       console.log("if2")
-    } else if(game[6] == game[7] && game[7] == game[8] && game[8] == symbol[vez] && game[6] !== ""){
+
+    } else if(game[6] == game[7] 
+      && game[7] == game[8] 
+      && game[8] == symbol[vez] 
+      && game[6] !== ""){
+
       winGame = true;
       console.log("if3")
-    } else if(game[0] == game[3] && game[3] == game[6] && game[6] == symbol[vez] && game[0] !== ""){
+
+    } else if(game[0] == game[3] 
+      && game[3] == game[6] 
+      && game[6] == symbol[vez] 
+      && game[0] !== ""){
+
       winGame = true;
       console.log("if4")
-    } else if(game[1] == game[4] && game[4] == game[7] && game[7] == symbol[vez] && game[1] !== ""){
+
+    } else if(game[1] == game[4] 
+      && game[4] == game[7] 
+      && game[7] == symbol[vez] 
+      && game[1] !== ""){
+
       winGame = true;
       console.log("if5")
-    } else if(game[2] == game[5] && game[5] == game[8] && game[8] == symbol[vez] && game[2] !== ""){
+
+    } else if(game[2] == game[5] 
+      && game[5] == game[8] 
+      && game[8] == symbol[vez] 
+      && game[2] !== ""){
+
       winGame = true;
       console.log("if6")
-    } else if(game[0] == game[4] && game[4] == game[8] && game[8] == symbol[vez] && game[0] !== ""){
+
+    } else if(game[0] == game[4] 
+      && game[4] == game[8] 
+      && game[8] == symbol[vez] 
+      && game[0] !== ""){
+
       winGame = true;
       console.log("if7")
-    } else if(game[2] == game[4] && game[4] == game[6] && game[6] == symbol[vez] && game[2] !== ""){
+
+    } else if(game[2] == game[4] 
+      && game[4] == game[6] 
+      && game[6] == symbol[vez] 
+      && game[2] !== ""){
+
       winGame = true;
       console.log("if8")
+
     }else{
        vez == 0? vez++ : vez--; 
     }
