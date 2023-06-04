@@ -113,12 +113,12 @@ h1{
 #gameOver{
   display: none;
 }
-#erro{
+/* #erro{
   display: none;
 }
 #erro p{
   font-size: 1.5rem;
-}
+} */
 #winGame{
   display: none;
 }

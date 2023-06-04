@@ -42,93 +42,11 @@ function CreateDivBox(event){
     box.appendChild(boxElement)
     game[id] = symbol[vez];
 
-    if(game[0] == game[1] 
-      && game[1] == game[2] 
-      && game[2] == symbol[vez] 
-      && game[0] !== "" ){
+    caseWin()
 
-      winGame = true;
-      console.log("if1")
+    checkWinGamer()
 
-    } else if(game[3] == game[4] 
-      && game[4] == game[5] 
-      && game[5] == symbol[vez] 
-      && game[3] !== ""){
-
-      winGame = true;
-      console.log("if2")
-
-    } else if(game[6] == game[7] 
-      && game[7] == game[8] 
-      && game[8] == symbol[vez] 
-      && game[6] !== ""){
-
-      winGame = true;
-      console.log("if3")
-
-    } else if(game[0] == game[3] 
-      && game[3] == game[6] 
-      && game[6] == symbol[vez] 
-      && game[0] !== ""){
-
-      winGame = true;
-      console.log("if4")
-
-    } else if(game[1] == game[4] 
-      && game[4] == game[7] 
-      && game[7] == symbol[vez] 
-      && game[1] !== ""){
-
-      winGame = true;
-      console.log("if5")
-
-    } else if(game[2] == game[5] 
-      && game[5] == game[8] 
-      && game[8] == symbol[vez] 
-      && game[2] !== ""){
-
-      winGame = true;
-      console.log("if6")
-
-    } else if(game[0] == game[4] 
-      && game[4] == game[8] 
-      && game[8] == symbol[vez] 
-      && game[0] !== ""){
-
-      winGame = true;
-      console.log("if7")
-
-    } else if(game[2] == game[4] 
-      && game[4] == game[6] 
-      && game[6] == symbol[vez] 
-      && game[2] !== ""){
-
-      winGame = true;
-      console.log("if8")
-
-    }else{
-       vez == 0? vez++ : vez--; 
-    }
-
-    if(players[0] == "" || players[1] == ""){
-      vez == 0? winner = "Jogador1" : winner = "Jogador2" ;
-    } else{
-      vez == 0? winner = players[0] : winner = players[1]
-    }
-
-    if(winGame == true){
-      divwinGame.style.display = ("flex");
-      let winGameP = document.querySelector("#winGameP");
-      winGameP.innerHTML = `<p> O ganhador foi:${winner} <\p>`
-    
-    } else if(game.indexOf("") == -1){
-      let gameOver = document.querySelector('#gameOver')
-      gameOver.style.display = ("flex");
-
-    } else if(winGame == true && gameOver == true ){
-        let erro = document.querySelector('#erro');
-        erro.style.display = ("flex");
-    }
+    vez == 0? vez++ : vez--; 
   }
 }
 
@@ -159,4 +77,53 @@ function restart(){
     div.parentNode.removeChild(div);
   })
 
+}
+
+function caseWin(){
+
+  let winStates = [
+    [0,1,2],
+    [3,4,5],
+    [6,7,8],
+    [0,3,6],
+    [1,4,7],
+    [0,5,8],
+    [0,4,8],
+    [2,4,6],
+  ]
+
+  for(let i = 0;i <  winStates.length; i++){
+    let seq = winStates[i];
+
+    let pos1 = seq[0];
+    let pos2 = seq[1];
+    let pos3 = seq[2];
+
+    if(game[pos1] == game[pos2] 
+      && game[pos1] == game[pos3] 
+      && game[pos1] !== "" ){
+  
+      winGame = true;
+    }
+  }
+}
+
+function checkWinGamer(){
+  if(winGame == true){
+
+    if(players[0] == "" || players[1] == ""){
+      vez == 0? winner = "Jogador1" : winner = "Jogador2" ;
+    } else{
+      vez == 0? winner = players[0] : winner = players[1]
+    }
+
+    divwinGame.style.display = ("flex");
+    let winGameP = document.querySelector("#winGameP");
+    winGameP.innerHTML = `<p> O ganhador foi:${winner} <\p>`
+  
+  } else if(game.indexOf("") == -1){
+    let gameOver = document.querySelector('#gameOver')
+    gameOver.style.display = ("flex");
+
+  }
 }
