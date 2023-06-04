@@ -3,10 +3,18 @@ let vez = 0;
 let players = [];
 const symbol = ["x", "o"]
 let game = ['', '', '', '', '', '', '', '', '']
-var winGame = false;
 let gameOver = false;
-let winner = "";
 let divwinGame = document.querySelector("#winGame");
+let winStates = [
+  [0,1,2],
+  [3,4,5],
+  [6,7,8],
+  [0,3,6],
+  [1,4,7],
+  [0,5,8],
+  [0,4,8],
+  [2,4,6],
+]
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -28,7 +36,6 @@ function start(){
 function CreateDivBox(event){
   let box = event.target;
   let id = box.id;
-  if(winGame == false && gameOver == false){
 
     if(game[id] !== ''){
       alert('Posição já ocupada meu caro')
@@ -42,12 +49,9 @@ function CreateDivBox(event){
     box.appendChild(boxElement)
     game[id] = symbol[vez];
 
-    caseWin()
-
-    checkWinGamer()
+    checkWin()
 
     vez == 0? vez++ : vez--; 
-  }
 }
 
 function addPlayers(player1,player2){
@@ -64,10 +68,9 @@ function restart(){
   divwinGame.style.display = ("none");
   vez = 0;
   game =["","","","","","","","",""];
-  winGame = false;
   gameOver = false;
   players = [];
-  winner = "";
+  // winner = "";
 
   
   classX.forEach(div => { 
@@ -79,18 +82,7 @@ function restart(){
 
 }
 
-function caseWin(){
-
-  let winStates = [
-    [0,1,2],
-    [3,4,5],
-    [6,7,8],
-    [0,3,6],
-    [1,4,7],
-    [0,5,8],
-    [0,4,8],
-    [2,4,6],
-  ]
+function checkWin(){
 
   for(let i = 0;i <  winStates.length; i++){
     let seq = winStates[i];
@@ -102,28 +94,26 @@ function caseWin(){
     if(game[pos1] == game[pos2] 
       && game[pos1] == game[pos3] 
       && game[pos1] !== "" ){
-  
-      winGame = true;
+    
+      divwinGame.style.display = ("flex");
+      let winGameP = document.querySelector("#winGameP");
+      winGameP.innerHTML = `<p> O ganhador foi:${checkWiner()} <\p>`
+
+      
+    }else if(game.indexOf("") == -1){
+      let gameOver = document.querySelector('#gameOver')
+      gameOver.style.display = ("flex");
     }
   }
 }
 
-function checkWinGamer(){
-  if(winGame == true){
+function checkWiner(){
 
-    if(players[0] == "" || players[1] == ""){
-      vez == 0? winner = "Jogador1" : winner = "Jogador2" ;
-    } else{
-      vez == 0? winner = players[0] : winner = players[1]
-    }
-
-    divwinGame.style.display = ("flex");
-    let winGameP = document.querySelector("#winGameP");
-    winGameP.innerHTML = `<p> O ganhador foi:${winner} <\p>`
-  
-  } else if(game.indexOf("") == -1){
-    let gameOver = document.querySelector('#gameOver')
-    gameOver.style.display = ("flex");
-
+  let winner = '';
+  if(players[0] == "" || players[1] == ""){
+    vez == 0? winner = "Jogador1" : winner = "Jogador2" ;
+  } else{
+    vez == 0? winner = players[0] : winner = players[1]
   }
+  return winner
 }
